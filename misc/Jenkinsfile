@@ -1,14 +1,9 @@
 node {
    def commit_id
-   def dockerhub_user
-   def dockerhub_pass
-   def DOCKERHUB=credentials('dockerhub')
    stage('Preparation') {
      checkout scm
      sh "git rev-parse --short HEAD > .git/commit-id"                        
      commit_id = readFile('.git/commit-id').trim()
-      dockerhub_user = '${DOCKERHUB_USER}'
-      dockerhub_pass = '${DOCKERHUB_PASSWORD}'
    }
    stage('test') {
      nodejs(nodeJSInstallationName: 'nodejs') {
@@ -17,7 +12,7 @@ node {
      }
    }
    stage('login') {
-      sh 'docker login -u $dockerhub_user -p $dockerhub_pass'
+      def login = docker.login('dockerhub')
    }
    stage('docker build/push') {
        def app = docker.build("cristian321/docker-nodejs-demo:${commit_id}", '.').push()
