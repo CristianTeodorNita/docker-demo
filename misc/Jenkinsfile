@@ -11,7 +11,7 @@ node {
        sh 'npm test'
      }
    }
-   stage('logout') {
+   stage('logout begin') {
       sh 'docker logout'
    }
    stage('docker build/push') {
@@ -19,7 +19,7 @@ node {
          def app = docker.build("cristian321/docker-nodejs-demo:${commit_id}", '.').push()
       }
    }
-   stage('logout') {
+   stage('logout end') {
       sh 'docker logout'
    }
 }
