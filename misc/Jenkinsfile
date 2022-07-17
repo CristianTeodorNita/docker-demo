@@ -7,8 +7,8 @@ node {
      checkout scm
      sh "git rev-parse --short HEAD > .git/commit-id"                        
      commit_id = readFile('.git/commit-id').trim()
-     dockerhub_user = $DOCKERHUB_USER
-     dockerhub_pass = $DOCKERHUB_PASSWORD
+      dockerhub_user = '${DOCKERHUB_USER}'
+      dockerhub_pass = '${DOCKERHUB_PASSWORD}'
    }
    stage('test') {
      nodejs(nodeJSInstallationName: 'nodejs') {
