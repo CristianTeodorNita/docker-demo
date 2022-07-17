@@ -1,12 +1,11 @@
 node {
    def commit_id
-   environment {
-      dockerhub=credentials('dockerhub')
-   }
+   def dockerhub_cred
    stage('Preparation') {
      checkout scm
      sh "git rev-parse --short HEAD > .git/commit-id"                        
      commit_id = readFile('.git/commit-id').trim()
+     dockerhub_cred=credentials('dockerhub')
    }
    stage('test') {
      nodejs(nodeJSInstallationName: 'nodejs') {
