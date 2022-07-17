@@ -2,12 +2,13 @@ node {
    def commit_id
    def dockerhub_user
    def dockerhub_pass
+   def DOCKERHUB=credentials('dockerhub')
    stage('Preparation') {
      checkout scm
      sh "git rev-parse --short HEAD > .git/commit-id"                        
      commit_id = readFile('.git/commit-id').trim()
-      sh 'cristian321 > dockerhub_user'
-      sh 'adevar12.n > dockeerhub_pass'
+     sh 'DOCKERHUB_USER > dockerhub_user'
+     sh 'DOCKERHUB_PASS > dockeerhub_pass'
    }
    stage('test') {
      nodejs(nodeJSInstallationName: 'nodejs') {
