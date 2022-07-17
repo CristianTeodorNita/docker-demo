@@ -14,7 +14,7 @@ node {
      }
    }
    stage('login') {
-      sh 'docker login -u $dockerhub_USR -password-stdin'
+      sh 'docker login -u $dockerhub_cred_USR -password-stdin'
    }
    stage('docker build/push') {
        def app = docker.build("cristian321/docker-nodejs-demo:${commit_id}", '.').push()
