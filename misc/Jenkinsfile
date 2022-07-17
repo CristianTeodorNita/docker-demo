@@ -15,9 +15,8 @@ node {
      }
    }
    stage('Login') {
-			steps {
-				sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
-			}
+	sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
+
 		}
    stage('docker build/push') {
        def app = docker.build("cristian321/docker-nodejs-demo:${commit_id}", '.').push()
