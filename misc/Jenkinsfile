@@ -12,8 +12,7 @@ node {
      }
    }
    stage('login') {
-      DOCKERHUB=credentials('cristian321')
-      sh 'docker login -u $DOCKERHUB_USER -p $DOCKERHUB_PASSWORD'
+      sh 'docker login -u dockerhub --password-stdin'
    }
    stage('docker build/push') {
        def app = docker.build("cristian321/docker-nodejs-demo:${commit_id}", '.').push()
