@@ -1,6 +1,3 @@
-environment {
-	DOCKERHUB_CREDENTIALS=credentials('dockerhub')
-}
 node {
    def commit_id
    stage('Preparation') {
@@ -15,7 +12,7 @@ node {
      }
    }
    stage('Login') {
-	sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
+	sh 'docker login -u dockerhub --password-stdin'
 
 		}
    stage('docker build/push') {
