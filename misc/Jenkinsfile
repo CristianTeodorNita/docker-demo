@@ -1,5 +1,8 @@
 node {
    def commit_id
+   environment {
+      dockerhub=credentials('dockerhub')
+   }
    stage('Preparation') {
      checkout scm
      sh "git rev-parse --short HEAD > .git/commit-id"                        
@@ -12,7 +15,7 @@ node {
      }
    }
    stage('login') {
-      sh 'docker login -u cristian321 -p adevar12.n'
+      sh 'docker login -u $dockerhub_USR -password-stdin'
    }
    stage('docker build/push') {
        def app = docker.build("cristian321/docker-nodejs-demo:${commit_id}", '.').push()
