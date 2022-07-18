@@ -28,7 +28,4 @@ node {
        def app = docker.build("cristi321/docker-nodejs-demo:${commit_id}", '.').push()
        }
    }
-    stage('docker logout at end'){
-      sh 'docker logout'
-   }
 }                                          
