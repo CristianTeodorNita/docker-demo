@@ -27,9 +27,7 @@ node {
       sh 'docker login -u cristian321 -p adevar12.n'
    }
    stage('docker build/push') {            
-     docker.withRegistry('', 'dockerhub') {
-       def app = docker.build("cristi321/docker-nodejs-demo:${commit_id}", '.').push()
-     }                                     
+       def app = docker.build("cristi321/docker-nodejs-demo:${commit_id}", '.').push()                                     
    }
     stage('docker logout at end'){
       sh 'docker logout'
