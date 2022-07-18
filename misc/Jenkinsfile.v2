@@ -24,8 +24,9 @@ node {
      mysql.stop()
    }
    stage('docker build/push') {
-       sh 'docker login -u cristian321 -p adevar12.n'
-       def app = docker.build("cristi321/docker-nodejs-demo:${commit_id}", '.').push()                                     
+      withDockerRegistry([ credentialsId: "dockerhub", url: "" ]) {
+       def app = docker.build("cristi321/docker-nodejs-demo:${commit_id}", '.').push()
+       }
    }
     stage('docker logout at end'){
       sh 'docker logout'
