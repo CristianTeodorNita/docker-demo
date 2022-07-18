@@ -22,7 +22,10 @@ node {
           sh 'npm test'                     
      }                                   
      mysql.stop()
-   } 
+   }
+   stage('docker first login'){
+      sh 'docker login -u cristian321 -p adevar12.n'
+   }
    stage('docker logout if login'){
       sh 'docker logout'
    }
